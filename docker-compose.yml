@@ -1,0 +1,42 @@
+version: "3"
+services:
+  loki:
+    image: grafana/loki:2.7.5
+    ports:
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - ./data/loki:/data/loki
+    command: -config.file=/etc/loki/loki-config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        labels: "containerPrettyName"
+    labels:
+      containerPrettyName: "Grafana Loki"
+
+  promtail:
+    image: grafana/promtail:2.7.5
+    volumes:
+      #- /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /home/user/docker/containers:/var/lib/docker/containers:ro
+      - ./manual_fixes.log:/manual_fixes.log:ro
+      - ./promtail-config.yaml:/etc/promtail/promtail-config.yaml:ro
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        labels: "containerPrettyName"
+    labels:
+      containerPrettyName: "Grafana Promtail"
+
+  grafana:
+    image: grafana/grafana-oss:9.4.7
+    ports:
+      - "127.0.0.1:3000:3000"
+    logging:
+      driver: "json-file"
+      options:
+        labels: "containerPrettyName"
+    labels:
+      containerPrettyName: "Grafana Dashboard"

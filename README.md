@@ -45,10 +45,13 @@ The `generate_alerts.py` Python script will, thus, send to Slack _one_
 of the following _three_ types of alerts:
 
 1. **Success**: `generate_alerts.py` can confirm that there are no unresolved alerts to be dealt with.
+
 ![screenshots/slack_success.png](screenshots/slack_success.png)
 
 2. **Alert(s)**: `generate_alerts.py` can confirm that they are unresolved alerts to be dealt with.
+
 ![screenshots/slack_alert.png](screenshots/slack_alert.png)
 
 3. **Inconclusive**: `generate_alerts.py` did not run sucessfully and cannot confirm if there are or are not any alerts to be dealt with.
+
 ![screenshots/slack_inconclusive.png](screenshots/slack_inconclusive.png)

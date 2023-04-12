@@ -27,7 +27,7 @@ started by running `docker-compose up -d`. The Grafana web interface
 will be available at http://localhost:3000 and the Loki REST API will be
 available at http://localhost:3100.
 
-#### `generate_alerts.py`
+#### `generate_alerts/generate_alerts.py`
 
 The `generate_alerts.py` Python script, when executed, queries the
 configured Loki REST API (default is `http://localhost:3100`) to see if

@@ -109,16 +109,27 @@ prev_forms_timestamp = None
 prev_subjects_counter_block = getLastValidCounterBlock("COUNTERS/EXPORT/Subjects")
 if prev_subjects_counter_block is not None:
   prev_subjects_timestamp = prev_subjects_counter_block['timestamp']
+else:
+  prev_subjects_timestamp = None
 
 prev_forms_counter_block = getLastValidCounterBlock("COUNTERS/EXPORT/Forms")
 if prev_forms_counter_block is not None:
   prev_forms_timestamp = prev_forms_counter_block['timestamp']
+else:
+  prev_forms_timestamp = None
 
 incremental_subject_exports_count = len(getExports("CARDS - Cards4CaRe", "ca.sickkids.ccm.lfs.cardiacrehab.internal.export.ExportTask Exported /Subjects/", since=prev_subjects_timestamp))
 incremental_form_exports_count = len(getExports("CARDS - Cards4CaRe", "ca.sickkids.ccm.lfs.cardiacrehab.internal.export.ExportTask Exported /Forms/", since=prev_forms_timestamp))
 
-total_subject_exports_count = prev_subjects_counter_block['value'] + incremental_subject_exports_count
-total_form_exports_count = prev_forms_counter_block['value'] + incremental_form_exports_count
+if prev_subjects_counter_block is not None:
+  total_subject_exports_count = prev_subjects_counter_block['value'] + incremental_subject_exports_count
+else:
+  total_subject_exports_count = incremental_subject_exports_count
+
+if prev_forms_counter_block is not None:
+  total_form_exports_count = prev_forms_counter_block['value'] + incremental_form_exports_count
+else:
+  total_form_exports_count = incremental_form_exports_count
 
 saveCount("Subjects", total_subject_exports_count, cleanup=True)
 saveCount("Forms", total_form_exports_count, cleanup=True)

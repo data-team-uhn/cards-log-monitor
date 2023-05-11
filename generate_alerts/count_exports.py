@@ -25,6 +25,10 @@ import hashlib
 import datetime
 import requests
 
+SUCCESS_SUBJECT_EXPORT_TEXT = os.environ['SUCCESS_SUBJECT_EXPORT_TEXT']
+SUCCESS_FORM_EXPORT_TEXT = os.environ['SUCCESS_FORM_EXPORT_TEXT']
+MONITORED_CONTAINER_PRETTY_NAME = os.environ['MONITORED_CONTAINER_PRETTY_NAME']
+
 LOKI_HOST = "http://localhost:3100"
 if 'LOKI_HOST' in os.environ:
   LOKI_HOST = os.environ['LOKI_HOST']
@@ -118,8 +122,8 @@ if prev_forms_counter_block is not None:
 else:
   prev_forms_timestamp = None
 
-incremental_subject_exports_count = len(getExports("CARDS - Cards4CaRe", "ca.sickkids.ccm.lfs.cardiacrehab.internal.export.ExportTask Exported /Subjects/", since=prev_subjects_timestamp))
-incremental_form_exports_count = len(getExports("CARDS - Cards4CaRe", "ca.sickkids.ccm.lfs.cardiacrehab.internal.export.ExportTask Exported /Forms/", since=prev_forms_timestamp))
+incremental_subject_exports_count = len(getExports(MONITORED_CONTAINER_PRETTY_NAME, SUCCESS_SUBJECT_EXPORT_TEXT, since=prev_subjects_timestamp))
+incremental_form_exports_count = len(getExports(MONITORED_CONTAINER_PRETTY_NAME, SUCCESS_FORM_EXPORT_TEXT, since=prev_forms_timestamp))
 
 if prev_subjects_counter_block is not None:
   total_subject_exports_count = prev_subjects_counter_block['value'] + incremental_subject_exports_count

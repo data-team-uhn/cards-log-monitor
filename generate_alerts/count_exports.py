@@ -123,8 +123,8 @@ total_form_exports_count = prev_forms_counter_block['value'] + incremental_form_
 saveCount("Subjects", total_subject_exports_count, cleanup=True)
 saveCount("Forms", total_form_exports_count, cleanup=True)
 
-slack_message = "**Exported Subjects** - _Today:_ {}, _Total:_ {}\n".format(incremental_subject_exports_count, total_subject_exports_count)
-slack_message += "**Exported Forms** - _Today:_ {}, _Total:_ {}".format(incremental_form_exports_count, total_form_exports_count)
+slack_message = "*Exported Subjects* -- _Today:_ {}, _Total:_ {}\n".format(incremental_subject_exports_count, total_subject_exports_count)
+slack_message += "*Exported Forms* -- _Today:_ {}, _Total:_ {}".format(incremental_form_exports_count, total_form_exports_count)
 
 print(slack_message)
 

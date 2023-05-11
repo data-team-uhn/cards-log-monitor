@@ -127,3 +127,6 @@ slack_message = "**Exported Subjects** - _Today:_ {}, _Total:_ {}\n".format(incr
 slack_message += "**Exported Forms** - _Today:_ {}, _Total:_ {}".format(incremental_form_exports_count, total_form_exports_count)
 
 print(slack_message)
+
+if SLACK_WEBHOOK_URL is not None:
+  requests.post(SLACK_WEBHOOK_URL, json={'text': slack_message})

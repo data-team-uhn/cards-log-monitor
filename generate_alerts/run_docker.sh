@@ -10,6 +10,7 @@ docker run \
 	-e SLACK_WEBHOOK_URL \
 	-e LOKI_HOST \
 	-e TZ=$(cat /etc/timezone) \
-	-v $(realpath last_error_free_checkpoint.txt):/last_error_free_checkpoint.txt \
+	-v $(realpath last_error_free_checkpoint.txt):/generate_alerts/last_error_free_checkpoint.txt \
+	-v $(realpath COUNTERS):/generate_alerts/COUNTERS \
 	-it \
 	ghcr.io/data-team-uhn/cards-log-monitor $ARGS
